@@ -1,0 +1,21 @@
+<aura:component >
+    <aura:attribute name="user_email" type="String"/>
+    <aura:handler event="c:SendMailToContactEvt" action="{!c.setEmailId}"/>
+    <form >
+    <div>
+          <div>
+              <ui:inputText aura:id="subject" label="Subject"                  
+                  value=""
+                  placeholder="Subject"/>
+          </div>
+    </div>
+    <div>
+          <div>
+              <ui:inputText aura:id="body" label="Body"
+                  value=""
+                  placeholder="Body"/>
+          </div>
+      </div>
+    </form>
+	
+</aura:component>

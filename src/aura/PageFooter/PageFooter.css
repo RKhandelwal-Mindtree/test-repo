@@ -1,0 +1,10 @@
+.THIS{
+    
+}
+.THIS .pageFooter {
+    position: fixed ;
+    bottom: 0 ;
+    z-index: 100 ;
+    left: 0 ;
+    width: 100% ;
+}

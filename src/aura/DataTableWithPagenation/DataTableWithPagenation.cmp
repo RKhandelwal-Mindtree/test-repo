@@ -1,0 +1,42 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes" 
+                controller='DataTableWithPagenation'
+                access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:attribute name="Accounts" type="Account[]" />
+    <aura:attribute name="page" type="integer" description="using for store page Number" />
+    <aura:attribute name="pages" type="integer" description="using for store All Pages page Number" />
+    <aura:attribute name="total" type="integer" description="total records count store " />
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="sortedDirection" type="String" default="asc" />
+    <aura:attribute name="sortedBy" type="String" default="Name"/>  
+    <aura:attribute name="sortedByFname" type="String" default="Account Name"/>  
+    <aura:attribute name="mapOfApiNamesAndLabel" type="Object" default="{}" />   
+    <div class="slds-m-around_small ">
+        <div class="slds-page-header" role="banner">
+            <p class="slds-page-header__title slds-truncate">{!v.total} Accounts • page {!v.page} / {!v.pages}</p>
+            <p class="slds-text-heading_small">Sorted by: {!v.sortedByFname} in {!v.sortedDirection} order</p>
+            <ui:inputSelect aura:id="recordSize" label="Display Record Per Page: " change="{!c.onSelectChange}">
+                <ui:inputSelectOption text="10" label="10" value="true"/>
+                <ui:inputSelectOption text="15" label="15"/>
+                <ui:inputSelectOption text="20" label="20"/>
+            </ui:inputSelect>
+        </div>
+        
+        <p class="slds-p-horizontal_small">
+            <lightning:datatable data="{!v.Accounts}" 
+            columns="{! v.mycolumns }" 
+            keyField="id"  
+            hideCheckboxColumn="true"
+            sortedBy="{!v.sortedBy}"
+            onsort="{!c.updateColumnSorting}"
+            sortedDirection="{!v.sortedDirection}" class="slds-table slds-table_striped slds-table_bordered slds-table_col-bordered"/>
+        </p>
+        <div class="slds-align_absolute-center">            
+            <lightning:button disabled="{!v.page == 1}" variant="brand" label="First" onclick="{! c.navigate }" />
+            <lightning:button disabled="{!v.page == 1}" variant="brand" label="Previous Page" onclick="{! c.navigate }" />            
+            <lightning:button disabled="{!v.page == v.pages}" variant="brand" label="Next Page" onclick="{! c.navigate }" />
+            <lightning:button disabled="{!v.page == v.pages}" variant="brand" label="Last" onclick="{! c.navigate }" />
+        </div>
+    </div>
+</aura:component>

@@ -1,0 +1,49 @@
+<!--
+Created by: Riya Khandelwal
+Description: Displays Account Data Table in Lightning Tab
+Date: Oct 27th, 2018
+-->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" 
+                controller="LightningDataTablePaginationController"
+                access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:attribute name="Accounts" type="Account[]" />
+    <aura:attribute name="page" type="integer" description="used for storing page number" />
+    <aura:attribute name="pages" type="integer" description="used for storing all pages page number" />
+    <aura:attribute name="total" type="integer" description="total records count store" />
+    <aura:attribute name="dataColumns" type="List" description="data columns to be displayed in data-table" />
+    <aura:attribute name="sortedDirection" type="String" default="asc" description="sorting direction of the rows displayed"/>
+    <aura:attribute name="sortedBy" type="String" default="Name" description="api name of the field by which the rows are sorted"/>            
+    <aura:attribute name="sortedByFname" type="String" default="Account Name" description="name of the field by which the rows are sorted"/>            
+    <aura:attribute name="mapOfApiNamesAndLabel" type="Object" default="{}" />
+    <lightning:card>
+        <aura:set attribute="title">
+            <lightning:icon iconName="standard:account" size="small" class="slds-m-right_small"/>
+            {!v.total} Accounts • page {!v.page} / {!v.pages}
+        </aura:set>
+        <aura:set attribute="footer">
+            <lightning:button disabled="{!v.page == 1}" variant="brand" label="First" onclick="{! c.navigate }" />
+            <lightning:button disabled="{!v.page == 1}" variant="brand" label="Previous" onclick="{! c.navigate }" />            
+            <lightning:button disabled="{!v.page == v.pages}" variant="brand" label="Next" onclick="{! c.navigate }" />
+            <lightning:button disabled="{!v.page == v.pages}" variant="brand" label="Last" onclick="{! c.navigate }" />
+        </aura:set>
+        <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="2">
+                <ui:inputSelect aura:id="recordSize" label="Display records per page: " change="{!c.onSelectChange}" class="single">
+                    <ui:inputSelectOption text="10" label="10" value="true"/>
+                    <ui:inputSelectOption text="15" label="15"/>
+                    <ui:inputSelectOption text="20" label="20"/>
+                </ui:inputSelect>
+            </lightning:layoutItem>
+        </lightning:layout >
+        <p class="slds-m-left_small">Sorted by: {!v.sortedByFname} in {!v.sortedDirection} order</p>
+        <lightning:datatable data="{!v.Accounts}" 
+            columns="{! v.dataColumns }" 
+            keyField="id"  
+            hideCheckboxColumn="true"
+            sortedBy="{!v.sortedBy}"
+            onsort="{!c.updateColumnSorting}"
+            sortedDirection="{!v.sortedDirection}" class="slds-table slds-table_striped slds-m-around_small"/>
+    </lightning:card>
+</aura:component>

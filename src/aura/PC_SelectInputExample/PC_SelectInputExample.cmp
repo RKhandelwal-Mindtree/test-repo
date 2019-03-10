@@ -1,0 +1,3 @@
+<aura:component controller="PC_SelectInputController">
+	<c:PC_SelectInput action="{!c.searchContacts}" info="Personnel__c" placeholder="Select Contact"/>
+</aura:component>

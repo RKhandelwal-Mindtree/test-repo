@@ -1,0 +1,7 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="vfHost" type="String" 
+        default="riyak-dev-ed--c.ap4.visual.force.com"/>
+    <aura:handler event="c:ContactSelected" action="{!c.contactSelected}"/>
+    <aura:attribute name="contact" type="Contact"/>
+    <iframe aura:id="vfFrame" src="{!'https://' + v.vfHost + '/apex/MapPage'}" style="height:426px;width: 392px;"/>
+</aura:component>

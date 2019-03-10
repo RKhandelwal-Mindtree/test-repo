@@ -1,0 +1,24 @@
+<aura:component implements="force:appHostable,force:hasRecordId,flexipage:availableForAllPageTypes" access="global" >
+<aura:attribute name="selectedRadio" type="Object"/> 
+      <div class="slds-form slds-form_compound slds-p-around--large">
+        <fieldset class="slds-form-element">
+          <legend class="slds-form-element__legend slds-form-element__label">Radio Group Label</legend>
+          <div class="slds-form-element__control">
+            <span class="slds-radio">
+              <input type="radio" id="radio-3" value="radio-3" name="options" onclick="{!c.toggleRadioButton}"/>
+              <label class="slds-radio__label" for="radio-3">
+                <span class="slds-radio_faux"></span>
+                <span class="slds-form-element__label">Radio Label One</span>
+              </label>
+            </span>
+            <span class="slds-radio">
+              <input type="radio" id="radio-4" value="radio-4" name="options" onclick="{!c.toggleRadioButton}"/>
+              <label class="slds-radio__label" for="radio-4">
+                <span class="slds-radio_faux"></span>
+                <span class="slds-form-element__label">Radio Label Two</span>
+              </label>
+            </span>
+          </div>
+        </fieldset>
+      </div>
+</aura:component>

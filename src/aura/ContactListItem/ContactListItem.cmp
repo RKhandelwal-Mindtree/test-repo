@@ -1,0 +1,10 @@
+<aura:component implements="force:appHostable">
+
+    <aura:attribute name="contact" type="Contact"/>
+    <aura:registerEvent name="ContactSelected" type="c:ContactSelected" />
+    
+    <li><a onclick="{!c.contactSelected}">    
+        <p class="slds-text-body--regular" style="font-weight:bold; color: rgb(84, 105, 141);"><lightning:icon iconName="utility:user" size="x-small" alternativeText="Contact" class="slds-p-horizontal--x-small" />{!v.contact.Name}</p>
+    	<p class="slds-text-body--regular" style="color: rgb(84, 105, 141);">{!v.contact.Phone}</p>
+	</a></li>
+</aura:component>

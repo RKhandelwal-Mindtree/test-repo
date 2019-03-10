@@ -1,0 +1,26 @@
+<aura:component >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+ 	<aura:attribute name="today" type="Date" default=""/>
+    <aura:attribute name="locationValue" type="String" default=""/>
+    
+    <div class="c-container">
+	<lightning:layout verticalAlign="start" multipleRows="true">
+        <lightning:layoutItem flexibility="auto" 
+                                  size="12"
+                                  smallDeviceSize="4"
+                                  mediumDeviceSize="8"
+                                  largeDeviceSize="10">
+                    
+            <c:inputLookup className="form-control" nameValue="{!v.locationValue}"/>
+                        
+        </lightning:layoutItem>
+        <lightning:layoutItem flexibility="auto" 
+                                  size="12"
+                                  smallDeviceSize="4"
+                                  mediumDeviceSize="8"
+                                  largeDeviceSize="10">
+			<ui:inputDateTime aura:id="date_time" value="" displayDatePicker="true" />
+        </lightning:layoutItem>
+    </lightning:layout>
+    </div>        
+</aura:component>

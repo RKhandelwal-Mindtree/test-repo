@@ -1,0 +1,29 @@
+<aura:component >
+	<aura:attribute name="items" type="Object[]" description="List of items to populate in the dropdown"/>
+	<aura:attribute name="action" type="Object" description="The search method to use"/>
+	<aura:attribute name="label" type="String" default="Name" description="The property to use as the label in each item"/>
+	<aura:attribute name="info" type="String" description="Additional info to include in result"/>
+	<aura:attribute name="id" type="String" default="Id" description="The property to use as the value in each item"/>
+	<aura:attribute name="value" type="Object" description="Value to set selection data to"/>
+	<aura:attribute name="placeholder" type="String" description="The placeholder to use"/>
+	<aura:attribute name="group" type="String" description="The property to group items by"/>
+	<aura:attribute name="extra" type="Object" description="any extra data to be included on select"/>
+	<aura:attribute name="clear" type="Boolean" default="true" description="Whether or not to clear the input after select" />
+	<aura:handler name="destroy" value="{!this}" action="{!c.handleDestroy}"/>
+	<aura:handler name="change" value="{!v.items}" action="{!c.itemsChanged}"/>
+	<!--<aura:registerEvent name="selectEvent" type="c:PC_SelectInputSelectEvent"/>
+
+-->
+	<ltng:require styles="{!join(',',
+							$Resource.JADE_PC + '/css/select2.min.css',
+                          	$Resource.JADE_PC + '/css/select2-bootstrap.min.css')}" />
+    <ltng:require scripts="{!$Resource.JADE_PC + '/js/select2.full.min.js'}"  afterScriptsLoaded="{!c.afterScriptsLoaded}"/>
+
+	<select class="form-control pc-select-input" aura:id="pc-select-input" >
+		<aura:if isTrue="{!empty(v.body)}">
+			<option></option>
+		</aura:if>
+		{!v.body}
+	</select>
+
+</aura:component>

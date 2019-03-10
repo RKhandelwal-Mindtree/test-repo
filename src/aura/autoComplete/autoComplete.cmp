@@ -1,0 +1,37 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="AccountController" >
+
+	<ltng:require styles="/resource/SLDS221/assets/styles/salesforce-lightning-design-system-ltng.min.css" />
+    <ltng:require scripts="{!$Resource.rxjs}" afterScriptsLoaded="{!c.autoComplete}"/>
+	    <ltng:require scripts="/resource/Ltng_resources/Lgt_InputLookup/js/jquery-2.2.4.min.js,
+                           /resource/Ltng_resources/Lgt_InputLookup/js/bootstrap.min.js" 
+                  styles="/resource/Ltng_resources/Lgt_InputLookup/css/bootstrap.min.css"
+                   />
+    
+    
+    <aura:attribute name="accounts" type="Account[]"/>
+
+	<form class="slds-form--stacked">
+  		<div class="slds-form-element">
+    		<label class="slds-form-element__label" for="name">Name</label>
+    		<div class="slds-form-element__control">
+                <ui:inputText aura:id='atcmplbox' class="slds-input" updateOn="keyup"/>
+    		</div>
+  		</div>
+  		<div class="slds-form-element">
+    		<label class="slds-form-element__label" for="email">Email</label>
+    		<div class="slds-form-element__control">
+      			<input id="email" class="slds-input" type="text" />
+    		</div>
+  		</div>
+
+  		<div class="slds-form-element">
+    		<button class="slds-button slds-button--brand" type="button">Update</button>
+  		</div>
+	</form>
+    <datalist id="acctlist">
+    	<aura:iteration items="{!v.accounts}" var="account">
+    		<option value = "{!account.Name}"/>
+    	</aura:iteration>
+    </datalist>
+
+</aura:component>

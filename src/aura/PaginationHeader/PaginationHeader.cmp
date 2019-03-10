@@ -1,0 +1,27 @@
+<aura:component controller="paginationController">
+    <aura:registerEvent name="pagesCountChange" type="c:PageTotalChangeEvt"  />
+
+    <header class="slds-global-header_container">
+        <div class="slds-global-header slds-grid slds-grid_align-spread">
+            <div class="slds-align_absolute-center">
+                <legend class="slds-form-element__label slds-text-title_caps">Account DataTable</legend>
+            </div>
+			<div class="slds-global-header__item" style="margin-right: -5%;">
+                <legend class="slds-form-element__label">Show</legend>
+            </div>
+            <div class="slds-global-header__item" style="width:10%;">
+                <div class="slds-form slds-form_horizontal">
+                    <lightning:select name="selectItem" aura:id="selectItem" label="Records" variant="label-hidden" onchange="{!c.changeRecordNumber}">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                    </lightning:select>
+                </div>
+            </div>
+            <div class="slds-global-header__item" style="margin-left: -22px;">
+                <legend class="slds-form-element__label">Entries</legend>
+            </div>
+
+        </div>
+    </header>
+</aura:component>

@@ -1,0 +1,28 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride" access="global">
+	<aura:attribute name="newAccount" type="Account"/>
+    <aura:attribute name="sampleNewAccount" type="Account"/>
+    <aura:attribute name="newAccountError" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <force:recordData aura:id="accountRecordCreator"
+            layoutType="FULL"
+            targetRecord="{!v.newAccount}"
+            targetError = "{!v.newAccountError}"
+            targetFields ="{!v.sampleNewAccount}"
+            recordId="{!v.recordId}"
+            mode="EDIT" 
+                      recordUpdated="{!c.handleRecordUpdated}"
+            />    
+    <div class="Record Details">
+        <lightning:card iconName="action:edit" title="Account">
+            <div class="slds-p-horizontal--small">
+                <lightning:input label="Account Name" aura:id="accountField" value="{!v.sampleNewAccount.Name}" padding="small"/>
+                <span>{!v.recordId}</span>
+                <br/>
+                <lightning:input label="Phone" aura:id="accountField" value="{!v.sampleNewAccount.Phone}"/>
+                <br/>
+                <lightning:button label="Save Account" variant="brand" onclick="{!c.handleSaveRecord}" />
+            </div>
+        </lightning:card>
+    </div>
+</aura:component>

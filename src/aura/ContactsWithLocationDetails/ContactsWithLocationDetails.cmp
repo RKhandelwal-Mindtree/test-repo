@@ -1,0 +1,66 @@
+<aura:component implements="force:appHostable" controller="ContactsWithLocationDetailsController">
+    <ltng:require styles="/resource/SLDS221/assets/styles/salesforce-lightning-design-system-ltng.min.css" />
+    <aura:attribute name="contact" type="Contact"/>
+    <aura:attribute name="contactName" type="String" default=""/>
+    <aura:attribute name="contactId" type="String" default=""/>
+    
+    <aura:handler event="c:ContactSelected" action="{!c.contactSelected}"/>
+    
+    <div class="slds-page-header" role="banner">
+      <div class="slds-media">
+        <div class="slds-media__figure">
+            <lightning:icon iconName="standard:contact" size="medium" alternativeText="Indicates contact"/>
+        </div>
+        <div class="slds-media__body">
+          <p class="slds-page-header__title slds-truncate slds-float--left" title="" style="font-weight:bold">Parent Contact </p>
+          <p class="slds-p-around--small slds-truncate slds-float--left"> {!v.contactName}</p>
+          <p class="slds-float--right">
+              <button class="slds-button slds-button--neutral" onclick="{!c.openModalPopup}">
+                  <lightning:icon iconName="utility:edit" size="x-small"/>
+                  Edit Address Details
+              </button>              
+          </p>  
+        </div>
+      </div>
+    </div>
+    <div class="slds-grid slds-grid--vertical-align-start slds-m-top--xx-large">
+        <div class="slds-col slds-size--2-of-6 slds-p-horizontal--medium"><c:QuickContacts /></div>
+		<div class="slds-col slds-size--2-of-6 slds-p-horizontal--medium"><c:MapComponent /></div>
+      	<div class="slds-col slds-size--2-of-6 slds-p-horizontal--medium" style="background-color:#F0F1F2"><c:Weather /></div>
+    </div> 	
+    <div id="modal_div" style="display:none;">
+        <div role="dialog" id="modal_id" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open">
+          <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close">                
+                    <button class="slds-button slds-button--neutral" onclick="{!c.hideModal}">X</button>                  
+                    <span class="slds-assistive-text">Close</span>
+            	</button>
+              <h2 id="header43" class="slds-text-heading--medium">{!v.contactName}</h2>
+            </div>
+            <div class="slds-modal__content slds-p-around--medium">
+                <fieldset class="slds-form--compound">
+                  <legend class="slds-form-element__label slds-text-title--caps">Location</legend>
+                  <div class="slds-form-element__group">
+                    <div class="slds-form-element__row">
+                      <div class="slds-form-element slds-size--1-of-2">
+                        <label class="slds-form-element__label" for="input-01">Latitude</label>
+                        <ui:inputText aura:id="latitude" value=""/>
+                      </div>
+                      <div class="slds-form-element slds-size--1-of-2">
+                        <label class="slds-form-element__label" for="input-02">Longitude</label>
+                        <ui:inputText aura:id="longitude" value="" />
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+            </div>
+            <div class="slds-modal__footer">
+              <button class="slds-button slds-button--neutral" onclick="{!c.hideModal}">Cancel</button>
+              <button class="slds-button slds-button--brand" onclick="{!c.saveContact}">Save</button>
+            </div>
+          </div>
+        </div>
+        <div id="modal_backdrop" class="slds-backdrop slds-backdrop--open"></div>
+    </div>
+</aura:component>

@@ -1,0 +1,89 @@
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:actionOverride,force:hasSObjectName" access="global" controller="OverrideNewButton_AccountController">
+        <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+        <aura:attribute name="hasAccess" type="Boolean" default="true"/>
+        <aura:attribute name="message" description="Message content, can be HTML" type="String" default="Message from MessageComponent.cmp"/>
+        <aura:attribute name="type" description="Message type, can be error/warning/info/success" type="String" default="info"/>
+        <aura:attribute name="objectFields" type="List"/>
+        <div aura:id="editDialog" role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                <button class="slds-button slds-button--icon-inverse slds-modal__close" onclick="{!c.hideModalPopup}">
+                    <lightning:icon iconName="utility:close" size="medium" variant="bare"/>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 class="slds-text-heading--medium">New Record(s)</h2>
+            </div>
+                <div class="slds-modal__content slds-p-around--medium ">
+                <aura:if isTrue="{!v.hasAccess}">
+                    <aura:set attribute="else">
+                        <div class="{!'slds-box slds-theme–alert-texture slds-theme–' + v.type}">
+                        <lightning:icon iconName="{! 'utility:'+ v.type }" size="medium" alternativeText="{!v.type}" Class="iconContainer"/>&nbsp;
+                            <span class="slds-text-body–regular">
+                                <aura:unescapedHtml value="{!v.message}"/>
+                            </span>
+                        </div>
+                    </aura:set>
+                    <lightning:layout>
+                    <lightning:layoutItem size="6">
+                        <lightning:card title="XML Import" iconName="action:upload">
+                            <center><c:FileUpload parentObject="{!v.sObjectName}" sobjectFields="{!v.objectFields}"/></center>
+                        </lightning:card>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="6" class="slds-border_left slds-p-left_large">
+                    <div style="margin-top: 20%">
+                    <center><lightning:button label="Create a record" variant="brand" onclick="{!c.createRecord}" /></center></div>
+                <!--    <lightning:card iconName="action:edit" title="Account">-->
+                <!--    <lightning:recordEditForm-->
+                <!--    aura:id="editForm"-->
+                <!--    onsuccess="{!c.handleSuccess}"-->
+                <!--    onerror="{!c.handleError}"-->
+                <!--    objectApiName="Account"-->
+                <!--    class="slds-border_left slds-p-left_large"-->
+                <!--    >-->
+        
+                <!--    <lightning:messages/>-->
+                        
+                <!--            <lightning:layout>-->
+                <!--                <lightning:layoutItem size="6">-->
+                <!--                    <lightning:inputField fieldName="Name" required="true" padding="small"/>-->
+                <!--                </lightning:layoutItem>-->
+                <!--                <lightning:layoutItem size="6" class="slds-p-left_medium">-->
+                <!--                    <lightning:inputField fieldName="Phone" required="true" padding="small"/>-->
+                <!--                </lightning:layoutItem>-->
+                <!--            </lightning:layout>-->
+                <!--            <lightning:layout>-->
+                <!--                <lightning:layoutItem size="6">-->
+                <!--                    <label class="slds-form-element__label">Account Owner</label>-->
+                <!--                    <lightning:outputField fieldName="OwnerId" padding="small" variant="label-hidden"/>-->
+                <!--                </lightning:layoutItem>-->
+                <!--                <lightning:layoutItem size="6" class="slds-p-left_medium">-->
+                                    <!--<label class="slds-form-element__label">Parent Account</label>-->
+                <!--                    <lightning:inputField fieldName="ParentId" padding="small" class="no-label"/>-->
+                <!--                </lightning:layoutItem>-->
+                <!--            </lightning:layout>-->
+                <!--            <lightning:layout>-->
+                <!--                <lightning:layoutItem size="6">-->
+                <!--                    <lightning:inputField fieldName="Fax" padding="small" />-->
+                <!--                </lightning:layoutItem>-->
+                <!--                <lightning:layoutItem size="6" class="slds-p-left_medium">-->
+                <!--                    <lightning:inputField fieldName="Website" padding="small" />-->
+                <!--                </lightning:layoutItem>-->
+                <!--            </lightning:layout>-->
+                <!--    <div class="slds-m-top_medium">-->
+                <!--        <lightning:button variant="brand" label="Save" title="Save" type="submit"/>-->
+                <!--    </div>-->
+                <!--    </lightning:recordEditForm>-->
+                <!--</lightning:card>-->
+                    </lightning:layoutItem>
+                </lightning:layout>
+                
+                </aura:if>
+                </div>
+                <!--<div class="slds-modal__footer">                -->
+                <!--    <lightning:button variant="neutral" label="Cancel" />-->
+                <!--    <lightning:button variant="brand" label="Submit" onclick="{!c.saveRecord}" />-->
+                <!--</div>-->
+            </div>
+        </div>
+        <div aura:id="overlay" class="slds-backdrop slds-backdrop--open"></div>
+</aura:component>

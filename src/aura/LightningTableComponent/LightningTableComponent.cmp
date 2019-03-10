@@ -1,0 +1,61 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller="paginationController">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="pageNumber" type="String" default="1" />
+    <aura:attribute name="currentPagesCount" type="String" default="5" />
+    <aura:attribute name="accounts" type="Account[]" />
+
+    <!-- Handler for the page chage event -->
+    <aura:handler event="c:PageChangeEvt" action="{!c.pageChange}" />
+    <!-- Handler for the total records to display event -->
+    <aura:handler event="c:PageTotalChangeEvt" action="{!c.recordCounterChange}" />
+
+
+    <table class="slds-table slds-table--bordered slds-table--cell-buffer" style="margin-top:50px;">
+        <thead>
+        <tr class="slds-text-heading--label">
+            <th scope="col">
+                <div class="slds-truncate" title="Account Name">Account Name</div>
+            </th>
+            <th scope="col">
+                <div class="slds-truncate" title="Account Type">Account Type</div>
+            </th>
+            <th scope="col">
+                <div class="slds-truncate" title="Industry">Industry</div>
+            </th>
+            <th scope="col">
+                <div class="slds-truncate" title="City">City</div>
+            </th>
+            <th scope="col">
+                <div class="slds-truncate" title="Rating">Rating</div>
+            </th>
+            <th scope="col">
+                <div class="slds-truncate" title="Phone">Phone</div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <aura:iteration items="{!v.accounts}" var="acc">
+            <tr>
+                <th scope="row">
+                    <div class="slds-truncate" title="{!acc.Name}">{!acc.Name}</div>
+                </th>
+                <th scope="row">
+                    <div class="slds-truncate" title="{!acc.Type}">{!acc.Type}</div>
+                </th>
+                <th scope="row">
+                    <div class="slds-truncate" title="{!acc.Industry}">{!acc.Industry}</div>
+                </th>
+                <th scope="row">
+                    <div class="slds-truncate" title="{!acc.BillingCity}">{!acc.BillingCity}</div>
+                </th>
+                <th scope="row">
+                    <div class="slds-truncate" title="{!acc.Rating}">{!acc.Rating}</div>
+                </th>
+                <th scope="row">
+                    <div class="slds-truncate" title="{!acc.Phone}">{!acc.Phone}</div>
+                </th>
+            </tr>
+        </aura:iteration>
+        </tbody>
+    </table>
+</aura:component>

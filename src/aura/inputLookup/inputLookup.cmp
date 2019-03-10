@@ -1,0 +1,31 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="InputLookupAuraController" >
+<!--
+	<ltng:require styles="/resource/SLDS221/assets/styles/salesforce-lightning-design-system-ltng.min.css" />
+    <ltng:require scripts="{!$Resource.rxjs}" afterScriptsLoaded="{!c.autoComplete}"/>
+	-->
+    <ltng:require scripts="/resource/Ltng_resources/Lgt_InputLookup/js/jquery-2.2.4.min.js,
+                           /resource/Ltng_resources/Lgt_InputLookup/js/bootstrap.min.js,
+                           /resource/Ltng_resources/typeahead.js" 
+                  styles="/resource/Ltng_resources/Lgt_InputLookup/css/bootstrap.min.css"
+                  afterScriptsLoaded="{!c.initTypeahead}" />
+    
+    <!--<aura:attribute name="accounts" type="Account[]"/> -->
+	
+    <aura:registerEvent name="inputLookupEvent" type="c:inputLookupEvt" />
+	<aura:handler name="inputLookupEvent" action="{!c.handleInputLookupEvt}"/>
+    
+    <!--<aura:attribute name="type" type="String" description="Sobject Type"/>-->
+    <aura:attribute name="value" type="String" description="Source / Destination value" />
+    <aura:attribute name="className" type="String" description="class name of the input object" />
+    <!-- PRIVATE ATTRS -->
+    <aura:attribute name="nameValue" type="String" description="Name of the current lookup 'name' field: loaded by controller" 
+                    access="PUBLIC" default=""/>
+    <aura:attribute name="isLoading" type="Boolean" description="Loading component" default="true"
+                    access="PRIVATE"/>
+    <aura:registerEvent name="LocDetailEvt" type="c:LocDetailEvt" />
+    <div class="has-feedback">
+	    <input id="{!globalId+'_typeahead'}" type="text" class="{!v.className}" 
+    	        readonly="{!v.isLoading}" value="{!v.nameValue}"/>
+		<span class="glyphicon glyphicon-search form-control-feedback"></span>
+	</div>
+</aura:component>

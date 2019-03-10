@@ -1,0 +1,8 @@
+<aura:component >
+    <aura:attribute name="pictureContent" type="Aura.Component[]"/>
+    <aura:attribute name="caption" type="Aura.Component[]"/>
+    <div>
+        <span>{!v.pictureContent}</span>
+        <span>{!v.caption}</span>
+    </div>
+</aura:component>

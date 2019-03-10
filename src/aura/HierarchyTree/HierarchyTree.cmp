@@ -1,0 +1,49 @@
+<aura:component controller="HierarchyTreeController">
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	<aura:attribute name="parentAccountId" type="String" />
+    <aura:attribute name="level" type="Integer" />
+     <ltng:require styles="/resource/HierarchyTree" 
+    />
+    <ltng:require scripts="/resource/jquery112" />
+    <aura:handler event="aura:waiting" action="{!c.waiting}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.doneWaiting}"/>
+    <!-- Dynamically load the list of contacts -->
+    <aura:attribute name="accounts" type="Account[]"/>
+    <aura:attribute name="lastExpanded" type="String"/>
+      
+      <ul class="slds-tree" role="tree" aria-labelledby="treeheading" style="{!'padding-left: '+add(v.level,1) + 'em;    width: 450px;'}" aria-activedescendant="tree0-node0">
+        <!-- Iterate over the list of accounts and display them -->
+        <aura:iteration var="account" items="{!v.accounts}">
+          <li id="{!account.Id + '_li'}" data-id="{!account.Id + '_li'}" class="slds-tree__branch slds-is-open" role="treeitem" aria-level="1" aria-expanded="true">
+          <div class="slds-tree__item">
+            <button class="slds-button slds-button--icon-bare slds-m-right--x-small">
+                <aura:if isTrue="{!account.Id == v.lastExpanded}">
+                        <c:svg class="slds-button__icon slds-button__icon--small"  xlinkHref="/resource/SLDS092/assets/icons/utility-sprite/svg/symbols.svg#right" />
+                    <aura:set attribute="else">
+                        <c:svg class="slds-button__icon slds-button__icon--small"  xlinkHref="/resource/SLDS092/assets/icons/utility-sprite/svg/symbols.svg#add" />
+                    </aura:set>
+                </aura:if> 
+              <span class="slds-assistive-text">Toggle</span>
+            </button>
+            
+            <div class="small-spinner notUploading" id="{!account.Id + '_img'}" aura:id="{!account.Id + '_img'}" >
+                <img src="/resource/SLDS092/assets/images/spinners/slds_spinner_brand.gif" alt="Loading..." ></img>
+            </div>
+            <span class="slds-pill">  
+			<span class="slds-pill__label">                
+            <a href="{!'#'+account.Id}" data-id="{!account.Id}" id="{!account.Id}" aura:id="{!account.Id}" tabindex="-1" role="presentation" onclick="{!c.getChilds}">
+                
+                  {!account.Name}
+                
+            </a>
+            </span>
+            </span>
+          </div>
+          
+              
+          <c:HierarchyTree_Helper parentId="{!account.Id}" level="{!add(v.level,1)}" expand="{!account.Id == v.lastExpanded}"/>
+        </li>
+        </aura:iteration>
+      </ul>
+      {!v.body}
+</aura:component>

@@ -1,0 +1,50 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,forceCommunity:themeLayout" access="global">
+<ltng:require styles="/resource/SLDS221/assets/styles/salesforce-lightning-design-system-ltng.min.css" />
+    
+    <aura:handler name="LocDetailEvt" event="c:LocDetailEvt" action="{!c.handleLocationDetailsEvt}"/>
+
+   		<div class="c-container">
+			<lightning:layout verticalAlign="start" multipleRows="true">
+				<lightning:layoutItem flexibility="auto" 
+                                  padding="around-small"
+                                  size="12"
+                                  smallDeviceSize="8"
+                                  mediumDeviceSize="10"
+                                  largeDeviceSize="12">
+                    
+                            <h1 class="slds-text-heading--large">Change Date/Locations </h1>
+                        
+                </lightning:layoutItem>
+                <lightning:layoutItem flexibility="auto"
+                                      padding="around-small"> 
+                    <p class="slds-text-body--regular"> Edit any relevant fields in form below and click the button to load new results. Please note,
+            we will try to offer you your chosen vehicle, but it may be available.</p>
+                </lightning:layoutItem>
+                <lightning:layoutItem flexibility="auto"
+                                      padding="around-small">
+                    <ui:message severity="warning" class="slds-text-body--regular">
+                        <lightning:icon iconName="utility:warning" variant="warning" size="medium" class="warningIcon" alternativeText="Indicates warning"/>                 
+                        <span>Please note: if you change your locations or dates/times you will have to select a new vehicle in the next step.</span> 
+  					</ui:message>
+                </lightning:layoutItem>    
+			</lightning:layout>
+            
+            <lightning:layout verticalAlign="start" multipleRows="true" class="detail_form">   
+                <lightning:layoutItem padding="around-small" size="12">
+                    <ui:outputText value="Pick up location:" />
+                    <c:LocationDetails aura:id="pickUpLocDetail"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="12">
+                        <ui:inputCheckbox aura:id="checkbox" class="check_box"/>                      
+                    Checkbox if Pickup &amp; Dropoff not same
+                </lightning:layoutItem>   
+                <lightning:layoutItem padding="around-small" size="12">
+                    <ui:outputText value="Drop off location:" />
+                    <c:LocationDetails aura:id="dropOffLocDetail"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="12">
+ 					<ui:button aura:id="button" buttonTitle="Next" class="btn" label="Next"/>
+                </lightning:layoutItem>
+            </lightning:layout>    
+		</div>
+</aura:component>

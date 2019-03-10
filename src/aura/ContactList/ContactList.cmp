@@ -1,0 +1,11 @@
+<aura:component controller="ContactListController" implements="forceCommunity:availableForAllPageTypes,forceCommunity:themeLayout" access="global">
+<ltng:require styles="/resource/SLDS221/assets/styles/salesforce-lightning-design-system-ltng.min.css" />
+    <aura:attribute name="contacts" type="Contact[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<aura:handler event="c:SearchKeyChange" action="{!c.searchKeyChange}"/>
+            <ul class="slds-scrollable--y" style="height: 395px;">
+                <aura:iteration items="{!v.contacts}" var="contact">
+                    <c:ContactListItem contact="{!contact}"/>
+                </aura:iteration>
+            </ul>
+</aura:component>

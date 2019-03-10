@@ -1,0 +1,32 @@
+<aura:component controller="paginationController">
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <aura:attribute name="pageCounterInfo" type="PageInfo" />
+
+    <!-- Handler for the page chage event -->
+    <aura:handler event="c:PageChangeEvt" action="{!c.pageChange}" />
+
+    <!-- Handler for the total records to display event -->
+    <aura:handler event="c:PageTotalChangeEvt" action="{!c.recordCounterChange}" />
+
+    <aura:attribute name="currentPagesCount" type="String" default="5" />
+
+    <footer class="pageFooter">
+        <div class="slds-global-header slds-grid slds-grid_align-spread">
+            <div class="slds-global-header__item">
+                <legend class="slds-form-element__label slds-text-title_caps">{!v.pageCounterInfo.currentPageNumber} of Total {!v.pageCounterInfo.totalPages} Pages</legend>
+            </div>
+            <div class="slds-button-group" role="group">
+                
+                <lightning:buttonIcon iconName="utility:left" disabled="{!v.pageCounterInfo.currentPageNumber == 1}" variant="border" alternativeText="Left" iconClass="dark" onclick="{!c.goPreviousPage}" />
+
+                <aura:iteration items="{!v.pageCounterInfo.pageCounter}" var="pgn">
+                    <c:PageCount pageNumber="{!pgn}" currentPageNumber="{!v.pageCounterInfo.currentPageNumber}" currentPagesCount="{!v.currentPagesCount}" />
+                </aura:iteration>
+                
+                <lightning:buttonIcon iconName="utility:right" variant="border" alternativeText="Right" iconClass="dark" onclick="{!c.goNextPage}" disabled="{!v.pageCounterInfo.currentPageNumber >= v.pageCounterInfo.totalPages}" />
+            </div>
+        </div>
+    </footer>
+</aura:component>

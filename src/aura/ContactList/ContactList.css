@@ -1,0 +1,27 @@
+.THIS {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background: #FFFFFF;
+    height: 100%;
+}
+
+.THIS a:link {
+    color: rgb(84, 105, 141);
+    text-decoration: none;
+}
+
+.THIS a:visited {
+    color: rgb(84, 105, 141);
+    text-decoration: none;
+}
+
+.THIS a:hover {
+    color: rgb(84, 105, 141);
+    text-decoration: none;
+}
+
+.THIS a:active {
+    color: rgb(84, 105, 141);
+    text-decoration: none;
+}

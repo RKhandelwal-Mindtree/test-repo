@@ -1,0 +1,57 @@
+<aura:component controller="FileUploadController">
+   <!-- 'parentId' Aura Attribute for store the Id for Parent Record where we are attach our file -->  
+   <!-- 'showLoadingSpinner' attribute for show/hide the uploading image and msg in aura:if-->
+   <aura:attribute name="showLoadingSpinner" type="boolean" default="false" />
+   <aura:attribute name="successfullyParsed" type="boolean" default="false" />
+   <aura:attribute name="fieldXMLNodes" type="List"  />
+   <aura:attribute name="sobjectFields" type="List"  />
+   <aura:attribute name="selectedValue" type="String"  />
+   <aura:attribute name="documentId" type="String"  />
+   <aura:attribute name="finalMappingOfFields" type="Map" default="{}"/>
+   <aura:attribute name="parsedDataList" type="List"/>
+   <!-- 'fileName' attribute for display the selected file name -->  
+   <aura:attribute name="fileName" type="String" default="No File Selected.." />
+   <aura:attribute name="parentObject" type="String" default="" />
+   <!-- Lightning Input with file type and on file change call the 'handleFilesChange' controller --> 
+    <aura:attribute name="accept" type="List" default="['.xml']"/>
+   <lightning:input aura:id="fileId" onchange="{!c.handleFilesChange}" type="file" name="file" label="Choose XML File" multiple="false" accept="{!v.accept}"/>
+   <div class="slds-text-body_small slds-text-color_error">{!v.fileName} </div>
+
+   <!--use aura:if for show-hide the loading spinner image--> 
+   <aura:if isTrue="{!v.showLoadingSpinner}">
+      <div class="slds-text-body_small slds-text-color_error">Uploading... 
+         <img src="/auraFW/resources/aura/images/spinner.gif" class="spinner-img" alt="Loading"/>
+      </div>
+   </aura:if>
+   <br/>
+    <lightning:button variant="base" label="Upload Attachment and Map fields" title="Map fields" onclick="{!c.doSave}"/>
+    <aura:if isTrue="{!v.successfullyParsed}">
+           <div class="slds"> 
+            <table class="slds-table slds-table--bordered slds-table--striped" >
+                <thead>
+                    <tr>
+                        <th scope="col"><span class="slds-truncate">XML Field Node</span></th>
+                        <th scope="col"><span class="slds-truncate">Object field</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.fieldXMLNodes}" var="item" indexVar="index">
+                        <tr>
+                            <td id="{!index}">{!item}</td>
+                            <td>
+                                <form class="slds-form--stacked">
+                                    <lightning:select name="sobjectField" aura:id="sobjectField" onchange="{!c.onChange}" tabindex="{!index}" label="{!item}" variant="label-hidden">
+                                		<aura:iteration items="{!v.sobjectFields}" var="item">
+                                    		<option text="{!item.label}" value="{!item.value}" selected="{!item.selected}"/>
+                                 		</aura:iteration>
+                            		</lightning:select>
+                                </form>
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+            <lightning:button variant="brand" label="Save" title="Save" onclick="{!c.saveRecord}" />
+        </div>
+    </aura:if>
+</aura:component>

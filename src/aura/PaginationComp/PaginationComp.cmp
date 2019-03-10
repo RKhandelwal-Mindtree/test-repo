@@ -1,0 +1,12 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" >
+	<div class="slds">
+        <!-- Header component -->
+        <c:PaginationHeader />
+
+        <!-- Table body component -->
+        <c:LightningTableComponent />
+
+        <!-- Footer component -->
+        <c:PageFooter />
+    </div>
+</aura:component>

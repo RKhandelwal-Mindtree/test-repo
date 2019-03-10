@@ -1,0 +1,25 @@
+.THIS {
+}
+
+.THIS .btn{
+    width : 100%;
+}
+
+.THIS .warningIcon{ 
+    float: left;
+    padding-right: 9pt;
+    padding-top: 3pt;
+    padding-left: 3pt;
+    padding-bottom: 3pt;
+}
+
+.THIS .detail_form{
+    width: 55%;
+    margin-left: 23%;
+    margin-top: 5%;
+}
+
+.THIS .check_box{
+    float: left;
+    margin-right: 7pt;
+}
